@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
 
 function App() {
+
+  const [count, setCount] = useState(-1)
+
+  useEffect(() => {
+    console.log('somou')
+  }, [count])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{
+      display: 'flex',
+      flex: 1,
+      alignItems: 'center',
+      flexDirection: 'column'
+    }} >
+      <h1
+        style={{
+          marginBottom: 20,
+          textAlign: 'center'
+        }}
+      >
+        {count}
+      </h1>
+      <button
+        onClick={() => setCount(count + 1)}
+      >
+        Somar +1
+      </button>
+
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
