@@ -28,16 +28,18 @@ function App() {
           {count}
         </h1>
         <div style={{ flexDirection: 'row' }}>
-          {numberList.length > 1 ? (
-            numberList.map((value, index) => (
-              <h3
-                style={{ textAlign: 'center' }}
-              >
-                [{value}{index !== numberList.length - 1 ? ', ' : null}]
+          <h3
+            style={{ textAlign: 'center' }}
+          >
+            [
+            {numberList.length > 0 && (
+              numberList.map((value, index) => (
+                <>
+                  {value}{index !== numberList.length - 1 ? ', ' : null}
+                </>
+              )))}
+            ]
               </h3>
-            ))) : (
-              <h2>[{numberList[0]}]</h2>
-            )}
         </div>
       </div>
       <div style={{ flexDirection: 'row' }}>
