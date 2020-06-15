@@ -1,0 +1,9 @@
+.borda-test {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+.header {
+  border-bottom: solid #f14668 0.5px;
+}
