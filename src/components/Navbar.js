@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { connect } from 'react-redux';
+import { toggleCategory } from '../store/actions';
 
-const Navbar = ({ categorias }) => {
+const Navbar = ({ category, dispatch }) => {
   return (
     <nav
       className="navbar header"
@@ -11,8 +12,8 @@ const Navbar = ({ categorias }) => {
     >
       <div className="navbar-brand">
         <a className="navbar-item" href="#">
-          <span class="icon is-large has-text-danger">
-            <i class="mdi mdi-48px mdi-food"></i>
+          <span className="icon is-large has-text-danger">
+            <i className="mdi mdi-48px mdi-food"></i>
           </span>
         </a>
 
@@ -37,8 +38,14 @@ const Navbar = ({ categorias }) => {
             <a className="navbar-link">Categorias</a>
 
             <div className="navbar-dropdown">
-              {categorias.map((value) => (
-                <a className="navbar-item">{value.title}</a>
+              {category.map((value) => (
+                <a
+                  key={value.id}
+                  className="navbar-item"
+                  onClick={() => dispatch(toggleCategory(value))}
+                >
+                  {value.title}
+                </a>
               ))}
               <hr className="navbar-divider" />
               <a className="navbar-item">Dê dicas</a>
@@ -50,8 +57,8 @@ const Navbar = ({ categorias }) => {
           <div className="navbar-item">
             <div className="buttons">
               <a className="button is-warning">
-                <span class="icon is-large has-text-danger">
-                  <i class="mdi mdi-36px mdi-cart-outline"></i>
+                <span className="icon is-large has-text-danger">
+                  <i className="mdi mdi-36px mdi-cart-outline"></i>
                 </span>
               </a>
             </div>
@@ -62,4 +69,4 @@ const Navbar = ({ categorias }) => {
   );
 };
 
-export default connect((state) => ({ categorias: state }))(Navbar);
+export default connect((state) => ({ category: state.category }))(Navbar);
