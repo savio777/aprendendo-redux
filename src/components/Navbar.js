@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Navbar() {
+import { connect } from 'react-redux';
+
+const Navbar = ({ categorias }) => {
   return (
     <nav
       className="navbar header"
@@ -35,9 +37,9 @@ export default function Navbar() {
             <a className="navbar-link">Categorias</a>
 
             <div className="navbar-dropdown">
-              <a className="navbar-item">Salgados</a>
-              <a className="navbar-item">Almoço</a>
-              <a className="navbar-item">Pizzas</a>
+              {categorias.map((value) => (
+                <a className="navbar-item">{value.title}</a>
+              ))}
               <hr className="navbar-divider" />
               <a className="navbar-item">Dê dicas</a>
             </div>
@@ -58,4 +60,6 @@ export default function Navbar() {
       </div>
     </nav>
   );
-}
+};
+
+export default connect((state) => ({ categorias: state }))(Navbar);

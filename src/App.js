@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from "react";
-import "./css/bulma.min.css";
-import "./css/custom.css";
+import React, { useState, useEffect } from 'react';
+import { Provider } from 'react-redux';
 
-import Navbar from "./components/Navbar";
+import './css/bulma.min.css';
+import './css/custom.css';
+
+import store from './store';
+
+import Navbar from './components/Navbar';
 
 function App() {
   useEffect(() => {}, []);
 
   return (
-    <div>
-      <Navbar />
+    <div className="App">
+      <Provider store={store}>
+        <Navbar />
+      </Provider>
     </div>
   );
 }
