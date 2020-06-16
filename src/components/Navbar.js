@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { connect } from 'react-redux';
-import { toggleCategory } from '../store/actions';
+import * as Actions from '../store/actions';
 
-const Navbar = ({ category, dispatch }) => {
+const Navbar = ({ category, cart, toggleCategory }) => {
+  useEffect(() => {
+    console.log('cart ', cart);
+    console.log('categ ', category);
+  }, []);
+
   return (
     <nav
       className="navbar header"
@@ -38,11 +43,11 @@ const Navbar = ({ category, dispatch }) => {
             <a className="navbar-link">Categorias</a>
 
             <div className="navbar-dropdown">
-              {category.map((value) => (
+              {category.category.map((value) => (
                 <a
                   key={value.id}
                   className="navbar-item"
-                  onClick={() => dispatch(toggleCategory(value))}
+                  onClick={() => toggleCategory(value)}
                 >
                   {value.title}
                 </a>
@@ -57,6 +62,9 @@ const Navbar = ({ category, dispatch }) => {
           <div className="navbar-item">
             <div className="buttons">
               <a className="button is-warning">
+                {cart.value > 0 && (
+                  <span style={{ marginRight: 20 }}>R$ {cart.value}</span>
+                )}
                 <span className="icon is-large has-text-danger">
                   <i className="mdi mdi-36px mdi-cart-outline"></i>
                 </span>
@@ -69,4 +77,16 @@ const Navbar = ({ category, dispatch }) => {
   );
 };
 
-export default connect((state) => ({ category: state.category }))(Navbar);
+const mapDispatchToProps = (dispatch) => ({
+  toggleCategory: (value) => dispatch(Actions.toggleCategory(value)),
+});
+
+const mapStateToProps = (state) => {
+  console.log('teste state ', state);
+  return {
+    category: state.category,
+    cart: state.cart,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
